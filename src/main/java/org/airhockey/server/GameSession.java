@@ -141,12 +141,12 @@ public class GameSession {
 
 
     private void checkPaddleCollision() {
-        if (Math.abs(puck.x - paddleLeft.x) < 20 &&
+        if (Math.abs(puck.x - paddleLeft.x) < Paddle.WIDTH / 2 &&
                 Math.abs(puck.y - paddleLeft.y) < Paddle.HEIGHT / 2) {
             puck.vx = Math.abs(puck.vx);
         }
 
-        if (Math.abs(puck.x - paddleRight.x) < 20 &&
+        if (Math.abs(puck.x - paddleRight.x) < Paddle.WIDTH / 2 &&
                 Math.abs(puck.y - paddleRight.y) < Paddle.HEIGHT / 2) {
             puck.vx = -Math.abs(puck.vx);
         }
@@ -162,4 +162,6 @@ public class GameSession {
                 players.size()
         );
     }
+
+
 }

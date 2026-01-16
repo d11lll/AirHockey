@@ -36,12 +36,4 @@ public class GameUpdate {
         this.gameStarted = gameStarted;
         this.connectedPlayers = connectedPlayers;
     }
-
-    public GameUpdate(float puckX, float puckY,
-                      float leftX, float leftY,
-                      float rightX, float rightY,
-                      int scoreLeft, int scoreRight) {
-        this(puckX, puckY, leftX, leftY, rightX, rightY,
-                scoreLeft, scoreRight, false, 0);
-    }
 }

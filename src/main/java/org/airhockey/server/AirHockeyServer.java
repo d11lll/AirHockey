@@ -79,7 +79,9 @@ public class AirHockeyServer {
             }
 
             case MOVE -> {
-                session.movePlayer(msg.sender, msg.payload);
+                if (session.isGameStarted()) {  // Проверяем, началась ли игра
+                    session.movePlayer(msg.sender, msg.payload);
+                }
             }
         }
     }
@@ -100,7 +102,7 @@ public class AirHockeyServer {
     private void broadcast(Message msg) {
         byte[] data = gson.toJson(msg).getBytes();
 
-        for (InetSocketAddress addr : session.getPlayers().values()) {
+        for (InetSocketAddress addr : session.getPlayerAddresses()) {
             try {
                 DatagramPacket p = new DatagramPacket(
                         data, data.length,

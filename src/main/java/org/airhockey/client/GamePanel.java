@@ -65,16 +65,13 @@ public class GamePanel extends JPanel {
     }
 
     private void drawField(Graphics g, float scaleX, float scaleY) {
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(0, 0, getWidth(), getHeight());
+        int centerLineWidth = (int)(4 * scaleX);
+        int dashHeight = (int)(10 * scaleY);
+        int dashSpacing = (int)(20 * scaleY);
 
-        g.setColor(Color.WHITE);
-        for (int y = 0; y < getHeight(); y += 20) {
-            g.fillRect(getWidth()/2 - 2, y, 4, 10);
+        for (int y = 0; y < getHeight(); y += dashSpacing) {
+            g.fillRect(getWidth()/2 - centerLineWidth/2, y, centerLineWidth, dashHeight);
         }
-
-        g.drawOval(getWidth()/2 - 50, getHeight()/2 - 50, 100, 100);
-        g.drawOval(getWidth()/2 - 100, getHeight()/2 - 100, 200, 200);
     }
 
     private void drawWaitingScreen(Graphics g, String message) {
