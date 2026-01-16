@@ -16,7 +16,6 @@
     </properties>
 
     <dependencies>
-        <!-- Gson для JSON -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

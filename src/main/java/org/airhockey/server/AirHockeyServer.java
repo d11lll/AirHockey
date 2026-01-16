@@ -114,7 +114,7 @@ public class AirHockeyServer {
     }
 
     public static void main(String[] args) throws Exception {
-        AirHockeyServer server = new AirHockeyServer(4444);
+        AirHockeyServer server = new AirHockeyServer(8888);
         server.start();
     }
 }

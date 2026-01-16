@@ -22,14 +22,14 @@ public class AirHockeyClient {
                 JOptionPane.showMessageDialog(null,
                         "Сервер создан!\n" +
                                 "IP: " + serverIP + "\n" +
-                                "Порт: 4444\n\n" +
+                                "Порт: 8888\n\n" +
                                 "Сообщите этот IP другим игрокам",
                         "Сервер запущен",
                         JOptionPane.INFORMATION_MESSAGE);
 
                 new Thread(() -> {
                     try {
-                        new AirHockeyServer(4444).start();
+                        new AirHockeyServer(8888).start();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -37,7 +37,7 @@ public class AirHockeyClient {
                 ip = "localhost";
             }
 
-            NetworkClient net = new NetworkClient(ip, 4444);
+            NetworkClient net = new NetworkClient(ip, 8888);
 
             SwingUtilities.invokeLater(() -> {
                 new GameWindow(net).setVisible(true);
