@@ -12,15 +12,15 @@ public class GamePanel extends JPanel {
         this.net = net;
         setBackground(Color.BLACK);
 
-        Timer timer = new Timer(16, e -> repaint());
+        Timer timer = new Timer(16, e -> repaint());//каждые 16мс перерисовка
         timer.start();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        super.paintComponent(g);//очистка экрана
 
-        GameUpdate u = net.getLastUpdate();
+        GameUpdate u = net.getLastUpdate();//получаем последнее состояние от сервера
         if (u == null) {
             drawWaitingScreen(g, "Подключение к серверу...");
             return;
@@ -33,19 +33,22 @@ public class GamePanel extends JPanel {
             return;
         }
 
-        float scaleX = getWidth() / 800f;
+        float scaleX = getWidth() / 800f;//коэффициенты ширины и длины чтоб на каждом экране одинаково выглядело
         float scaleY = getHeight() / 600f;
 
         drawField(g, scaleX, scaleY);
 
         g.setColor(Color.WHITE);
+        //левая ракетка. fillRect() рисует от левого верхнего угла
         g.fillRect((int)(u.leftX * scaleX) - 10,
                 (int)(u.leftY * scaleY) - 40,
                 20, 80);
+        //правая
         g.fillRect((int)(u.rightX * scaleX) - 10,
                 (int)(u.rightY * scaleY) - 40,
                 20, 80);
 
+        //шайба
         g.setColor(Color.RED);
         g.fillOval((int)(u.puckX * scaleX) - 10,
                 (int)(u.puckY * scaleY) - 10,
@@ -66,9 +69,11 @@ public class GamePanel extends JPanel {
 
     private void drawField(Graphics g, float scaleX, float scaleY) {
         g.setColor(Color.DARK_GRAY);
-        g.fillRect(0, 0, getWidth(), getHeight());
+        g.fillRect(0, 0, getWidth(), getHeight());//фон
 
+        //рисвоание пунктира
         g.setColor(Color.WHITE);
+        //одна палочка
         int centerLineWidth = (int)(4 * scaleX);
         int dashHeight = (int)(10 * scaleY);
         int dashSpacing = (int)(20 * scaleY);

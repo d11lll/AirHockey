@@ -8,13 +8,13 @@ public class GameWindow extends JFrame {
         setTitle("Air Hockey");
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);// Центрировать окно на экране
 
-        GamePanel panel = new GamePanel(net);
-        add(panel);
+        GamePanel panel = new GamePanel(net);// Панель где рисуется игра
+        add(panel); // Добавляем её в окно
 
-        setFocusable(true);
-        requestFocusInWindow();
+        setFocusable(true);// Окно может получать фокус (для клавиш)
+        requestFocusInWindow(); // Запрашиваем фокус сразу
 
         addKeyListener(new KeyAdapter() {
             @Override
@@ -35,10 +35,10 @@ public class GameWindow extends JFrame {
         historyItem.addActionListener(e -> new HistoryWindow().setVisible(true));
         exitItem.addActionListener(e -> System.exit(0));
 
-        gameMenu.add(historyItem);
-        gameMenu.addSeparator();
-        gameMenu.add(exitItem);
-        menuBar.add(gameMenu);
-        setJMenuBar(menuBar);
+        gameMenu.add(historyItem);//история
+        gameMenu.addSeparator();//разделительная линия
+        gameMenu.add(exitItem);//выход
+        menuBar.add(gameMenu);//добавляем меню в панель
+        setJMenuBar(menuBar);//установка панель меню в окно
     }
 }

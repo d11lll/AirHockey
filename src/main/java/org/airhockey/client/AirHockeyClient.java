@@ -7,17 +7,17 @@ import java.net.InetAddress;
 public class AirHockeyClient {
     public static void main(String[] args) throws Exception {
         try {
-            String localIP = InetAddress.getLocalHost().getHostAddress();
+            String localIP = InetAddress.getLocalHost().getHostAddress();// свой айпи
 
-            String ip = JOptionPane.showInputDialog(null,
+            String ip = JOptionPane.showInputDialog(null, //диалог подключения
                     "Ваш IP адрес: " + localIP +
                             "\n\nВведите IP сервера:\n(оставьте пустым чтобы создать сервер)",
                     "Air Hockey - Подключение",
                     JOptionPane.QUESTION_MESSAGE);
 
-            if (ip == null) return;
+            if (ip == null) return;//если отмена то выход
 
-            if (ip.isBlank()) {
+            if (ip.isBlank()) {//если создать сервер
                 String serverIP = InetAddress.getLocalHost().getHostAddress();
                 JOptionPane.showMessageDialog(null,
                         "Сервер создан!\n" +
@@ -27,20 +27,21 @@ public class AirHockeyClient {
                         "Сервер запущен",
                         JOptionPane.INFORMATION_MESSAGE);
 
-                new Thread(() -> {
+                new Thread(() -> {//AirHockeyServer.start() блокирует выполнение бесконечными циклами.
+                    // Без отдельного потока программа зависла бы.
                     try {
-                        new AirHockeyServer(8888).start();
+                        new AirHockeyServer(8888).start();//запуск сервера в отдельном окне
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }).start();
+                }).start();//заупск потока
                 ip = "localhost";
             }
 
-            NetworkClient net = new NetworkClient(ip, 8888);
+            NetworkClient net = new NetworkClient(ip, 8888);//подключение к серверу
 
-            SwingUtilities.invokeLater(() -> {
-                new GameWindow(net).setVisible(true);
+            SwingUtilities.invokeLater(() -> {//Swing требует, чтобы все операции с интерфейсом выполнялись в специальном потоке (Event Dispatch Thread)
+                new GameWindow(net).setVisible(true);//стздание и показ окна
             });
 
         } catch (Exception e) {
